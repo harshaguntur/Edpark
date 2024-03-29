@@ -1,34 +1,82 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState,useNavigate } from "react";
+
 
 const SignIn = () => {
+  const [formData, setFormData] = useState({
+    userName: "",
+    userPass: "",
+  });
 
-    const [formData,setFormData] = useState({
-      userPar : "",
-      userPass : "",
-    })
+  // const navigate = useNavigate();
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
+  const [errorMessage, setErrorMessage] = useState("");
 
-    const handelSubmit = ()=>{
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-      axios.post("/api/SignIn",formData);
+  const handelSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("/api/SignIn", {formData});
+
+      //deconstructing parms from axios
+      const { userName, userPass } = response.data;
 
 
+
+      if (userName === "true" && userPass === "true") {
+        // Successful login
+        console.log("User logged in successfully");
+        // navigate("/studentdashboard");
+
+      }
+      
+      
+      else if (userName === "true" && userPass === "false") {
+        // Incorrect password
+        setErrorMessage("Incorrect password");
+      } 
+      
+      
+      else {
+        // User not found
+        setErrorMessage("User not found");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
     }
-  
+  };
 
   return (
     <>
-      <h1>Sign In</h1>
-      <h4>Email/Username</h4>
-      <input type="text" placeholder="Enter email/password" />
-      <h4>Password</h4>
-      <input type="password"/>
+      <form onSubmit={handelSubmit}>
+        <h1>Sign In</h1>
+        <h4>Email/Username</h4>
+        <input
+          type="text"
+          name="userName"
+          value={formData.userName}
+          onChange={handleChange}
+          placeholder="Enter email/password"
+          required
+        />
+        <h4>Password</h4>
+        <input
+          type="password"
+          name="userPass"
+          value={formData.userPass}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Submit</button>
+        {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
+      </form>
     </>
   );
-}
-export default SignIn
+};
+
+export default SignIn;
