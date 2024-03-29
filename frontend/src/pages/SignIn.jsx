@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState,useNavigate } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
 
 const SignIn = () => {
@@ -8,7 +9,7 @@ const SignIn = () => {
     userPass: "",
   });
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -31,7 +32,7 @@ const SignIn = () => {
       if (userName === "true" && userPass === "true") {
         // Successful login
         console.log("User logged in successfully");
-        // navigate("/studentdashboard");
+        navigate("/studentdashboard");
 
       }
       
