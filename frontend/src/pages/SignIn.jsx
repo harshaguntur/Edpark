@@ -24,8 +24,10 @@ const SignIn = () => {
   return (
     <>
       <h1>Sign In</h1>
-      <h4>Email/Mobile no</h4>
+      <h4>Email/Username</h4>
       <input type="text" placeholder="Enter email/password" />
+      <h4>Password</h4>
+      <input type="password"/>
     </>
   );
 }
