@@ -22,9 +22,13 @@ const SignIn = () => {
   
 
   return (
-
-    <h1>hi</h1>
-
-  )
+    <>
+      <h1>Sign In</h1>
+      <h4>Email/Username</h4>
+      <input type="text" placeholder="Enter email/password" />
+      <h4>Password</h4>
+      <input type="password"/>
+    </>
+  );
 }
 export default SignIn
