@@ -1,6 +1,7 @@
 import express from "express";
 import ConnectDB from "./DB/ConnectDB.js";
 import SignUpRouter from "./routers/SignupRoute.js";
+import SignInRouter from "./routers/SigninRoute.js";
 
 
 
@@ -17,6 +18,7 @@ app.use(express.json());
 //routes
 
 app.use("/api/SignUp",SignUpRouter);
+app.use("/api/SignIn",SignInRouter);
 
 
 
