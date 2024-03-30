@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullname: "",
     phone: "",
@@ -22,24 +25,28 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Do something with the form data, for example, send it to a backend server
-    
     // console.log(formData);
-    axios.post("/api/SignUp",{
-      formData
-    })
 
+    if (formData.password === formData.confirmPassword) {
+      axios.post("/api/SignUp", {
+        formData,
+      });
 
-    // Reset form after submission
-    setFormData({
-      fullname: "",
-      phone: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      college: "",
-      place: "",
-    });
+      // Reset form after submission
+      setFormData({
+        fullname: "",
+        phone: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        college: "",
+        place: "",
+      });
+
+      navigate("/signin");
+    } else {
+      console.log("password do not match ");
+    }
   };
 
   return (
