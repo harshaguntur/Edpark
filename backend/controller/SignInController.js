@@ -3,43 +3,26 @@ import User from "../DB/models/user_model.js";
 export const SignInController = async (req, res) => {
   const { userName, userPass } = req.body.formData;
 
-
   try {
+    const user = await User.findOne({ username: userName });
 
-    const user =  await User.findOne(({username:userName}));
-
-
-    if(userPass === user.password){
-      // console.log("user found");
+    if (userPass === user.password) {
       res.send({
-        userName : "true",
-        userPass : "true",
+        userName: "true",
+        userPass: "true",
       });
-
-
-    }
-
-    else{
+    } else {
       res.send({
-          userName : "true",
-          userPass : "false"
-      })
+        userName: "true",
+        userPass: "false",
+      });
     }
 
-
-
-
-
-    if(!user){
-      res.send({userName : "false"});
+    if (!user) {
+      res.send({ userName: "false" });
       console.log("user not found");
-
     }
-
-
-
-
   } catch (error) {
-      res.send({userName : "false"});
+    res.send({ userName: "false" });
   }
 };

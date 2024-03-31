@@ -8,15 +8,14 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
 
-    phone:{ 
-        type: String ,
-        required:true, 
+    phone: {
+      type: String,
+      required: true,
     },
 
     email: {
       type: String,
       required: true,
-
     },
 
     password: {
@@ -24,15 +23,14 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
-    college:{
-        type:String,
-        required:true,
+    college: {
+      type: String,
+      required: true,
     },
-    place:{
-        type:String,
-        require:true,
-    }
-
+    place: {
+      type: String,
+      require: true,
+    },
   },
   { timestamps: true }
 );

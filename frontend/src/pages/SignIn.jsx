@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-
 const SignIn = () => {
   const [formData, setFormData] = useState({
     userName: "",
@@ -22,28 +21,19 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/api/SignIn", {formData});
+      const response = await axios.post("/api/SignIn", { formData });
 
       //deconstructing parms from axios
       const { userName, userPass } = response.data;
-
-
 
       if (userName === "true" && userPass === "true") {
         // Successful login
         console.log("User logged in successfully");
         navigate("/studentdashboard");
-
-      }
-      
-      
-      else if (userName === "true" && userPass === "false") {
+      } else if (userName === "true" && userPass === "false") {
         // Incorrect password
         setErrorMessage("Incorrect password");
-      } 
-      
-      
-      else {
+      } else {
         // User not found
         setErrorMessage("User not found");
       }
